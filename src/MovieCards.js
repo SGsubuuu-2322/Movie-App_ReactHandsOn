@@ -1,62 +1,61 @@
 import React from "react";
 
 class MovieCards extends React.Component {
-  addStars = () => {
-    // Type-1:
-    // this.setState({
-    //   stars: this.state.stars + 0.5,
-    // });
+  // addStars = () => {
+  //   // Type-1:
+  //   // this.setState({
+  //   //   stars: this.state.stars + 0.5,
+  //   // });
 
-    // Type-2:
-    this.setState(
-      (prevState) => {
-        if (prevState.stars < 10) {
-          return {
-            stars: prevState.stars + 0.5,
-          };
-        }
+  //   // Type-2:
+  //   this.setState(
+  //     (prevState) => {
+  //       if (prevState.stars < 10) {
+  //         return {
+  //           stars: prevState.stars + 0.5,
+  //         };
+  //       }
 
-        return;
-      }
-      // () => console.log("Inside the setState - Stars: ", this.state.stars)
-    );
+  //       return;
+  //     }
+  //     // () => console.log("Inside the setState - Stars: ", this.state.stars)
+  //   );
 
-    // console.log("Outside the setState - Stars: ", this.state.stars);
-  };
+  //   // console.log("Outside the setState - Stars: ", this.state.stars);
+  // };
 
-  minusStars = () => {
-    this.setState((prevState) => {
-      if (prevState.stars > 0) {
-        return {
-          stars: prevState.stars - 0.5,
-        };
-      }
-    });
-  };
+  // minusStars = () => {
+  //   this.setState((prevState) => {
+  //     if (prevState.stars > 0) {
+  //       return {
+  //         stars: prevState.stars - 0.5,
+  //       };
+  //     }
+  //   });
+  // };
 
-  handleFav = () => {
-    this.setState({
-      fav: !this.state.fav,
-    });
-  };
-  handleCart = () => {
-    this.setState({
-      cart: !this.state.cart,
-    });
-  };
+  // handleFav = () => {
+  //   this.setState({
+  //     fav: !this.state.fav,
+  //   });
+  // };
+  // handleCart = () => {
+  //   this.setState({
+  //     cart: !this.state.cart,
+  //   });
+  // };
 
   render() {
     // for changing props data names...
-    // const { movies: data } = this.props; 
-    const { title, plot, price, rating, stars, fav, cart } = this.props.movies;
+    // const { movies: data } = this.props;
+    const { title, plot, price, rating, stars, fav, cart, poster } =
+      this.props.movies;
+    const { movies, addStars, minusStars, favBtn, cartBtn } = this.props;
     return (
       <div className="main">
         <div className="movie-card">
           <div className="left">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"
-              alt="Movie Poster"
-            />
+            <img src={poster} alt="Movie Poster" />
           </div>
           <div className="right">
             <div className="title">{title}</div>
@@ -70,7 +69,9 @@ class MovieCards extends React.Component {
                   src="https://cdn-icons-png.flaticon.com/128/56/56889.png"
                   alt="decrease"
                   className="str-btn"
-                  onClick={this.minusStars}
+                  onClick={() => {
+                    minusStars(movies);
+                  }}
                 />
 
                 <img
@@ -83,7 +84,9 @@ class MovieCards extends React.Component {
                   src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png"
                   alt="increase"
                   className="str-btn"
-                  onClick={this.addStars}
+                  onClick={() => {
+                    addStars(movies);
+                  }}
                   // this.addStars.bind(this)
                 />
                 <span className="starCount">{stars}</span>
@@ -100,14 +103,18 @@ class MovieCards extends React.Component {
 
               <button
                 className={fav ? "unfavourite-btn" : "favourite-btn"}
-                onClick={this.handleFav}
+                onClick={() => {
+                  favBtn(movies);
+                }}
               >
                 {fav ? "Un-favourite" : "Favourite"}
               </button>
 
               <button
                 className={cart ? "unfavourite-btn" : "cart-btn"}
-                onClick={this.handleCart}
+                onClick={() => {
+                  cartBtn(movies);
+                }}
               >
                 {cart ? "Remove from cart" : "Add to cart"}
               </button>
