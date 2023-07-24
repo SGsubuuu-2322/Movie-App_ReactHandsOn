@@ -1,4 +1,6 @@
 import { Component } from "react";
+
+// Styling the component using styled-components...
 import styled from "styled-components";
 
 const Nav = styled.div`
