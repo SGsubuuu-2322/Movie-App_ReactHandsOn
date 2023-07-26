@@ -58,7 +58,7 @@ export default class Navbar extends Component {
               alt="cart-icon"
             />
             <CartCount className="cart-count" color="Yellow" show={true}>
-              0
+              {this.props.cartCount}
             </CartCount>
           </CartContainer>
         </Nav>
