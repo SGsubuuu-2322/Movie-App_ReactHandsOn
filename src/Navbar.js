@@ -1,5 +1,3 @@
-import { Component } from "react";
-
 // Styling the component using styled-components...
 import styled from "styled-components";
 
@@ -46,23 +44,21 @@ const CartCount = styled.span`
   visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
-export default class Navbar extends Component {
-  render() {
-    return (
-      <>
-        <Nav className="navbar">
-          <Title className="app-title">MovieFlix</Title>
-          <CartContainer className="cart">
-            <CartIcon
-              src="https://cdn-icons-png.flaticon.com/128/891/891462.png"
-              alt="cart-icon"
-            />
-            <CartCount className="cart-count" color="Yellow" show={true}>
-              {this.props.cartCount}
-            </CartCount>
-          </CartContainer>
-        </Nav>
-      </>
-    );
-  }
+export default function Navbar(props) {
+  return (
+    <>
+      <Nav className="navbar">
+        <Title className="app-title">MovieFlix</Title>
+        <CartContainer className="cart">
+          <CartIcon
+            src="https://cdn-icons-png.flaticon.com/128/891/891462.png"
+            alt="cart-icon"
+          />
+          <CartCount className="cart-count" color="Yellow" show={true}>
+            {props.cartCount}
+          </CartCount>
+        </CartContainer>
+      </Nav>
+    </>
+  );
 }
